@@ -1,5 +1,5 @@
 <template>
-    <div v-for="menu in userMenu">
+    <div v-for="menu in userMenu" :key="menu._id">
         <el-sub-menu 
             v-if="menu.children && menu.children.length > 0 && menu.children[0].menuType == 1 "
             :key="menu._id"

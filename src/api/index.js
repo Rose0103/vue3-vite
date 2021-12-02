@@ -6,7 +6,7 @@ export default {
             url:'/users/login',
             method: 'post',
             data: params,
-            // mock: true
+            mock: false
         })
     },
     noticeCount() {
@@ -23,6 +23,44 @@ export default {
             method: 'get',
             data: {},
              mock: true
+        })
+    },
+    userList(params) {
+        return request({
+            url:'/users/list',
+            method: 'get',
+            data: params,
+             mock: false
+        })
+    },
+    userDelete(params) {
+        return request({
+            url:'/users/delete',
+            method: 'post',
+            data: params,
+             mock: true
+        })
+    },
+    RoleNameList() {
+        return request({
+            url:'/roles/allList',
+            method: 'get',
+            mock: true
+        })
+    },
+    DeptList() {
+        return request({
+            url:'/dept/list',
+            method: 'get',
+            mock: true
+        })
+    },
+    userSubmit(params) {
+        return request({
+            url:'/users/operate',
+            method: 'post',
+            data: params,
+            mock: true
         })
     }
 }

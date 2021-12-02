@@ -1,6 +1,7 @@
 <script>
 import {Setting, Fold,Bell,ArrowDown } from '@element-plus/icons'
-import TreeMenu from './TreeMenu.vue'
+import TreeMenu from './TreeMenu.vue';
+import BreadCrumb from './BreadCrumb.vue'
   export default {
     name: 'home',
     components: {
@@ -8,7 +9,8 @@ import TreeMenu from './TreeMenu.vue'
       fold: Fold,
       bell: Bell,
       ArrowDown,
-      TreeMenu 
+      TreeMenu,
+      BreadCrumb
     },
     data() {
       return {
@@ -69,7 +71,9 @@ import TreeMenu from './TreeMenu.vue'
       <div class="nav-top">
         <div class="nav-left">
           <fold class="menu-fold" @click="toggle"></fold>
-          <div class="bread">面包屑</div>
+          <div class="bread">
+            <bread-crumb></bread-crumb>
+          </div>
         </div>
         <div class="user-info">
           <el-badge :is-dot="noticeCount > 0 ? true : false" class="user-badge">
@@ -92,9 +96,9 @@ import TreeMenu from './TreeMenu.vue'
         </div>
       </div>
       <div class="wrapper">
-        <div class="main-page">
+        <!-- <div class="main-page"> -->
           <router-view></router-view>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

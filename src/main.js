@@ -33,7 +33,7 @@ for(let iconName in ElIconModules){
     app.component(transElIconName(iconName),ElIconModules[iconName])
 }
 
-app.use(ElementPlus)
+app.use(ElementPlus, {size: 'small'})
 app.use(router)
 app.use(store)
 app.mount('#app')
