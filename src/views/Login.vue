@@ -1,12 +1,11 @@
 <script>
-import {User, View} from '@element-plus/icons'
 export default {
   name: "login",
   data() {
     return {
       user: {
-        userName:'',
-        passWord: '',
+        userName:'admin',
+        passWord: '123456',
       },
       loginRules: {
         userName: [{required:true,message:'请输入用户名',trigger: "blur"}],
@@ -31,12 +30,6 @@ export default {
     }
   },
   computed: {
-    users() {
-      return User
-    },
-    view() {
-      return View
-    }
   },
   mounted() {
     // this.$request.get("/login").then((res) => {
@@ -56,10 +49,10 @@ export default {
       <el-form :model="user" :rules="loginRules" status-icon ref="userForm">
         <div class="title">登录页</div>
         <el-form-item prop="userName">
-          <el-input type="text" :prefix-icon="users" v-model="user.userName"></el-input>
+          <el-input type="text"  v-model="user.userName"></el-input>
         </el-form-item>
         <el-form-item prop="passWord">
-          <el-input type="password" :prefix-icon="view" v-model="user.passWord"></el-input>
+          <el-input type="password"  v-model="user.passWord"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" class="btn-login" @click="login">登录</el-button>

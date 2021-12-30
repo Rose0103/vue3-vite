@@ -26,10 +26,9 @@ import BreadCrumb from './BreadCrumb.vue'
     },
     methods: {
       handleLogout(val) {
-        console.log(val);
         if (val == "email") return
         this.$store.commit('saveUserInfo', '')
-        this.userInfo = null
+        this.userInfo = ''
         this.$router.push('/login')
       },
       toggle() {
@@ -49,11 +48,10 @@ import BreadCrumb from './BreadCrumb.vue'
 
 <template>
  <div class="basic-layout">
-    <!-- <div :class="[nav-side, isCollapse ? 'fold' : 'unfold']"> -->
     <div :class="['nav-side', isCollapse ? 'fold' : 'unfold']">
         <div class="logo">
           <img src="./../assets/logo.png" alt="">
-          <span v-if="!isCollapse">智慧管理系统</span>
+          <span v-show="!isCollapse">管理系统</span>
         </div>
       <!-- 菜单部分 -->
       <el-menu
@@ -82,7 +80,7 @@ import BreadCrumb from './BreadCrumb.vue'
             </el-icon>
           </el-badge>
           <el-dropdown @command="handleLogout">
-            <span class="user-link">
+            <span class="user-link" >
               {{userInfo.userName}}
              <el-icon><arrow-down /></el-icon>
             </span>

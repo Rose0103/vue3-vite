@@ -49,14 +49,16 @@ function request (options) {
     // 后面组件中在调用接口的时候 传过来的都在对象的data属性中 
     options.params = options.data
   }
+
+  let isMock = config.mock;
   if (typeof options.mock !== 'undefined') {
-    config.mock = options.mock
+    isMock = options.mock
   }
   // 这一点很重要 如果是线上环境这里的baseApi 一定不能出错 不然一上线就是 p0级bug
   if (config.env === 'prod') {
     service.defaults.baseURL = config.baseApi
   } else {
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi
+    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
   }
   return service(options)
 }

@@ -6,7 +6,7 @@
             :index="menu.path"
         >
           <template #title>
-            <el-icon :size='20'><i-menu /></el-icon>
+            <i :class="menu.icon"></i>
             <span :class="['menu-title', isCollapse ? 'shows' : 'hides']">{{menu.menuName}}</span>
           </template>
           <tree-menu :userMenu="menu.children"></tree-menu>
@@ -38,7 +38,8 @@ export default {
     .menu-title {
         &.shows {
             display: none;
+           
         }
     }
-    
+   
 </style>
