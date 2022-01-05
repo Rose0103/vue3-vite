@@ -18,6 +18,16 @@ export default {
           prop: "icon",
         },
         {
+          label: "菜单类型",
+          prop: "menuType",
+          formatter(row, column, value) {
+            return {
+              1: "菜单",
+              2: "按钮",
+            }[value];
+          },
+        },
+        {
           label: "权限标识",
           prop: "menuCode",
         },

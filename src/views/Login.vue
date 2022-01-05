@@ -1,36 +1,53 @@
 <script>
+import storage from "../utils/storage";
 export default {
   name: "login",
   data() {
     return {
       user: {
-        userName:'admin',
-        passWord: '123456',
+        userName: "admin",
+        passWord: "123456",
       },
       loginRules: {
-        userName: [{required:true,message:'请输入用户名',trigger: "blur"}],
-        passWord: [{required:true,message:'请输入密码',trigger: "blur"}]
-      }
-    }
+        userName: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+        ],
+        passWord: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      },
+    };
   },
   methods: {
     getHome() {
       this.$router.push("/welcome");
     },
     login() {
-      this.$refs.userForm.validate((valid) => {
-         if (valid) {
-          this.$api.login(this.user).then((res) => {
+      this.$refs.userForm.validate( (valid) => {
+        if (valid) {
+          this.$api.login(this.user).then( async (res) => {
             console.log(res);
             this.$store.commit("saveUserInfo", res);
+            await this.loadAsyncRoutes();
             this.$router.replace("/welcome");
           });
         }
-      })
-    }
+      });
+    },
+    async loadAsyncRoutes() {
+      let userInfo = storage.getItem("userInfo") || {};
+      if (userInfo.token) {
+        try {
+          const { menuList } = await this.$api.getPermissionList();
+          let routes = generateRoute(menuList);
+          routes.map((route) => {
+            let url = `./../views/${route.component}.vue`;
+            route.component = () => import(url);
+            router.addRoute("home", route);
+          });
+        } catch (error) {}
+      }
+    },
   },
-  computed: {
-  },
+  computed: {},
   mounted() {
     // this.$request.get("/login").then((res) => {
     //   console.log(res);
@@ -49,13 +66,15 @@ export default {
       <el-form :model="user" :rules="loginRules" status-icon ref="userForm">
         <div class="title">登录页</div>
         <el-form-item prop="userName">
-          <el-input type="text"  v-model="user.userName"></el-input>
+          <el-input type="text" v-model="user.userName"></el-input>
         </el-form-item>
         <el-form-item prop="passWord">
-          <el-input type="password"  v-model="user.passWord"></el-input>
+          <el-input type="password" v-model="user.passWord"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="btn-login" @click="login">登录</el-button>
+          <el-button type="primary" class="btn-login" @click="login"
+            >登录</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -63,7 +82,7 @@ export default {
 </template>
 
 <style lang="scss">
-.login-wrapper{
+.login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

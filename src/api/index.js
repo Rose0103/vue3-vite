@@ -28,12 +28,21 @@ export default {
             mock: false
         })
     },
-    // 查询所有用户接口
+    // 查询用户接口
     userList(params) {
         return request({
             url: '/users/list',
             method: 'get',
             data: params,
+            mock: false
+        })
+    },
+    // 查询所有用户接口
+    getAllUserList() {
+        return request({
+            url: '/users/all/list',
+            method: 'get',
+            data: {},
             mock: false
         })
     },
@@ -56,12 +65,12 @@ export default {
         })
     },
     // 查询所有部门
-    DeptList() {
+    DeptList(params) {
         return request({
             url: '/dept/list',
             method: 'get',
-            data: {},
-            mock: true
+            data: params,
+            mock: false
         })
     },
     // 新增和编辑用户接口
@@ -91,8 +100,8 @@ export default {
             mock: false
         })
     },
-     // 新增和编辑角色接口
-     roleOperate(params) {
+    // 新增和编辑角色接口
+    roleOperate(params) {
         return request({
             url: '/roles/operate',
             method: 'post',
@@ -100,8 +109,8 @@ export default {
             mock: false
         })
     },
-     // 设置权限角色接口
-     roleUpdatePermission(params) {
+    // 设置权限角色接口
+    roleUpdatePermission(params) {
         return request({
             url: '/roles/update/permission',
             method: 'post',
@@ -109,7 +118,24 @@ export default {
             mock: false
         })
     },
-    
+      // 部门创建/编辑/删除接口
+     deptOperate(params) {
+        return request({
+            url: '/dept/operate',
+            method: 'post',
+            data: params,
+            mock: false
+        })
+    },
+    // 获取用户对应的权限菜单
+    getPermissionList() {
+        return request({
+            url: '/users/getPermissionList',
+            method: 'get',
+            data: {},
+            mock: false
+        })
+    },
 }
 
 

@@ -291,8 +291,8 @@ export default {
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button type="primary" @click="handleCreate">新增</el-button>
-        <el-button type="danger" @click="handlePatchDelete">批量删除</el-button>
+        <el-button type="primary" @click="handleCreate" v-has:add="'user-create'">新增</el-button>
+        <el-button type="danger" @click="handlePatchDelete" v-has="'user-path-delete'">批量删除</el-button>
       </div>
       <el-table
         :data="userList.arr"
@@ -314,6 +314,7 @@ export default {
               type="primary"
               size="mini"
               @click="handleEdit(scope.row)"
+              v-has="'user-edit'"
             >
               编辑
             </el-button>
@@ -321,6 +322,7 @@ export default {
               type="danger"
               size="mini"
               @click="handleDelete(scope.row)"
+              v-has="'user-delete'"
             >
               删除
             </el-button>

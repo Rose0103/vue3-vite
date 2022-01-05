@@ -28,7 +28,7 @@ import BreadCrumb from './BreadCrumb.vue'
       handleLogout(val) {
         if (val == "email") return
         this.$store.commit('saveUserInfo', '')
-        this.userInfo = ''
+        this.userInfo = {}
         this.$router.push('/login')
       },
       toggle() {
@@ -39,8 +39,10 @@ import BreadCrumb from './BreadCrumb.vue'
         this.noticeCount = res
       },
        async  getMenuList() {
-        const res =  await this.$api.menuList()
-        this.userMenu = res
+        const {menuList, actionList} =  await this.$api.getPermissionList()
+        this.userMenu = menuList;
+        this.$store.commit('saveMenuList',menuList);
+        this.$store.commit('saveActionList',actionList);
       }
     },
   }

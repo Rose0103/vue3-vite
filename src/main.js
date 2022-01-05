@@ -1,13 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
-
-// 统一导入el-icon图标
-import * as ElIconModules from '@element-plus/icons'
-// 导入转换图标名称的函数
-import { transElIconName } from './utils/utils.js'  
-
-
 import router  from './router/router'
 import 'element-plus/dist/index.css'
 import config from './config/index'
@@ -25,13 +18,27 @@ import store from './store'
 
 const app = createApp(App)
 
+app.directive('has',{
+    beforeMount:(el,binding) => {
+        // console.log(el,binding);
+        // 获取按钮权限
+        let actionList = storage.getItem('actionList');
+        let value = binding.value;
+        // 判断列表中是否有对应按钮权限标识
+        let hasPermission = actionList.includes(value);
+        if(!hasPermission){
+            el.style = 'display:none';
+            setTimeout(() => {
+                el.parentNode.removeChild(el)
+            },0)
+        }
+    },
+})
+
+
 app.config.globalProperties.$request = request
 app.config.globalProperties.$storage = storage
 app.config.globalProperties.$api = api
-// 统一注册el-icon图标
-for(let iconName in ElIconModules){
-    app.component(transElIconName(iconName),ElIconModules[iconName])
-}
 
 app.use(ElementPlus, {size: 'small'})
 app.use(router)

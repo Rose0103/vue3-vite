@@ -57,7 +57,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
       },
-      action: "add",
+      action: "create",
       showModel: false,
       showPermission: false,
       curRoleId: null,
@@ -205,7 +205,7 @@ export default {
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">查询</el-button>
+          <el-button type="primary" @click="getRoleList">查询</el-button>
           <el-button @click="handleReset('form')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -256,7 +256,7 @@ export default {
     </div>
 
     <el-dialog
-      :title="action == 'add' ? '新增角色' : '编辑角色'"
+      :title="action == 'create' ? '创建角色' : '编辑角色'"
       v-model="showModel"
       :before-close="handleColseDialog"
     >
